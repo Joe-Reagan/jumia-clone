@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joe Tush shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        
+        <nav>
+             <logo><img src="logo.png" alt="Logo" height="40px" width="50px"><br><p>Joe Tush</p></logo>
+            
+            <ul>
+               <li><a href="index.html">Home</a></li>
+               <li><a href="login.html">Login</a></li>
+               <li><a href="login.html">Signup</a></li>
+
+            </ul>
+        </nav>
+        
+    
+    </header>
+    <main>
+
+<div class="txt1">
+    <p id="typewriter"></p>
+    </div>
+<div class="btn1">
+    <button onclick="window.location.href='dashboard.html'">Shop Now</button>
+
+</div>
+    </main>
+<section class="featured-products">
+    <h2>Featured Products</h2>
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="jeans.jpg" alt="Jeans">
+            <h3>Stylish Jeans</h3>
+            <p>ksh500.00</p>
+            <button onclick="alert('Added to cart!')">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="shirt.svg" alt="Shirt">
+            <h3>Casual Shirt</h3>
+            <p>ksh300.00</p>
+            <button onclick="alert('Added to cart!')">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="shoes.svg" alt="Shoes">
+            <h3>Comfortable Shoes</h3>
+            <p>ksh3700.00</p>
+            <button onclick="alert('Added to cart!')">Buy Now</button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>About Us</h3>
+            <p>We provide the best fashion items with quality and style.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Products</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>Email: joereagan206@gmail.com</p>
+            <p>Phone: +254111985238</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Joe Tush. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+const typewriterElement = document.getElementById('typewriter');
+const text = "We sell the best tushes in town! We don't just sell we design your looks. Shop with us Today by making a order and we deliver to your doorstep!";
+let index = 0;
+let isDeleting = false;
+
+function typeWriter() {
+    if (!isDeleting) {
+        typewriterElement.innerHTML = text.substring(0, index + 1);
+        index++;
+        if (index === text.length) {
+            isDeleting = true;
+            setTimeout(typeWriter, 2000); // Pause before deleting
+            return;
+        }
+    } else {
+        typewriterElement.innerHTML = text.substring(0, index);
+        index--;
+        if (index === 0) {
+            isDeleting = false;
+            setTimeout(typeWriter, 500); // Pause before typing again
+            return;
+        }
+    }
+    setTimeout(typeWriter, isDeleting ? 50 : 100); // Speed: faster deleting
+}
+
+typeWriter();
+</script>
+
+</body>
+</html>
