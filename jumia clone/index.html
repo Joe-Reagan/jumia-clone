@@ -12,12 +12,22 @@
         <nav>
              <logo><img src="logo.png" alt="Logo" height="40px" width="50px"><br><p>Joe Tush</p></logo>
             
-            <ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
                <li><a href="index.html">Home</a></li>
                <li><a href="login.html">Login</a></li>
                <li><a href="login.html">Signup</a></li>
+               <li><a href="seller.html">Sell with Us</a></li>
 
             </ul>
+            <div class="cart-icon" onclick="showCart()">
+                <img src="cart.png" alt="Cart" style="width: 30px; height: 30px;">
+                <span id="cart-count">0</span>
+            </div>
         </nav>
         
     
@@ -32,6 +42,50 @@
 
 </div>
     </main>
+
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total">Total: ksh0</div>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="checkout-modal">
+        <div class="checkout-content">
+            <span class="close" onclick="closeCheckout()">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkout-form">
+                <label for="name">Name:</label>
+                <input type="text" id="checkout-name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="checkout-email" required>
+                <label for="address">Address:</label>
+                <textarea id="checkout-address" required></textarea>
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" required>
+                    <option value="mpesa">M-Pesa</option>
+                    <option value="card">Credit Card</option>
+                </select>
+                <div id="mpesa-fields" style="display: block;">
+                    <label for="phone">M-Pesa Phone Number:</label>
+                    <input type="tel" id="checkout-phone" placeholder="e.g., 0712345678" required>
+                </div>
+                <div id="card-fields" style="display: none;">
+                    <label for="card-number">Card Number:</label>
+                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                    <label for="expiry">Expiry Date:</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" required>
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" placeholder="123" required>
+                </div>
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
+    </div>
+
 <section class="featured-products">
     <h2>Featured Products</h2>
     <div class="products-grid">
@@ -67,7 +121,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="dashboard.html">Products</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </div>
         <div class="footer-section">
@@ -82,6 +136,124 @@
 </footer>
 
 <script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+updateCartCount();
+
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+});
+
+function showCart() {
+    document.getElementById('cart-modal').style.display = 'block';
+    renderCart();
+}
+
+function closeCart() {
+    document.getElementById('cart-modal').style.display = 'none';
+}
+
+function renderCart() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div>
+                <h4>${item.name}</h4>
+                <p>Size: ${item.size}</p>
+                <p>Price: ksh${item.price}</p>
+                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)">
+                <button onclick="removeItem(${index})">Remove</button>
+            </div>
+        `;
+        cartItems.appendChild(itemDiv);
+        total += item.price * item.quantity;
+    });
+    document.getElementById('cart-total').textContent = `Total: ksh${total}`;
+}
+
+function updateQuantity(index, quantity) {
+    cart[index].quantity = parseInt(quantity);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+}
+
+function updateCartCount() {
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cart-count').textContent = count;
+}
+
+document.getElementById('checkout-btn').addEventListener('click', () => {
+    closeCart();
+    document.getElementById('checkout-modal').style.display = 'block';
+});
+
+function closeCheckout() {
+    document.getElementById('checkout-modal').style.display = 'none';
+}
+
+document.getElementById('checkout-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const method = document.getElementById('payment-method').value;
+    if (method === 'mpesa') {
+        const phone = document.getElementById('checkout-phone').value;
+        alert(`M-Pesa payment initiated. Please check your phone ${phone} for the STK push.`);
+    } else {
+        alert('Payment processed with card. (Simulated)');
+    }
+    alert('Order placed successfully!');
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    closeCheckout();
+});
+
+document.getElementById('payment-method').addEventListener('change', (e) => {
+    const method = e.target.value;
+    document.getElementById('mpesa-fields').style.display = method === 'mpesa' ? 'block' : 'none';
+    document.getElementById('card-fields').style.display = method === 'card' ? 'block' : 'none';
+});
+
+document.querySelectorAll('.product-card button').forEach(btn => {
+    btn.onclick = (e) => {
+        const card = e.target.closest('.product-card');
+        const name = card.querySelector('h3').textContent;
+        const priceText = card.querySelector('p').textContent;
+        const price = parseInt(priceText.split('ksh')[1]);
+        const size = 'N/A'; // No size in index
+        const image = card.querySelector('img').src;
+        const quantity = parseInt(prompt('Enter quantity:', '1')) || 1;
+        addToCart({ name, price, size, image, quantity });
+    };
+});
+
+function addToCart(item) {
+    const existing = cart.find(i => i.name === item.name && i.size === item.size);
+    if (existing) {
+        existing.quantity += item.quantity;
+    } else {
+        cart.push(item);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    alert('Added to cart!');
+}
+
 const typewriterElement = document.getElementById('typewriter');
 const text = "We sell the best tushes in town! We don't just sell we design your looks. Shop with us Today by making a order and we deliver to your doorstep!";
 let index = 0;

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Jumia Clone</title>
+    <link rel="stylesheet" href="xtyle.css">
+    <style>
+        .contact-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .contact-info h2 {
+            color: rgb(230, 142, 11);
+        }
+        .info-item {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+        .social-links {
+            text-align: center;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background: rgb(230, 142, 11);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .social-links a:hover {
+            background: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <logo><img src="logo.png" alt="Logo" height="40px" width="50px"><br><p>Joe Tush</p></logo>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Shop</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="seller.html">Sell with Us</a></li>
+            </ul>
+            <div class="search">
+                <input type="text" placeholder="Search...">
+                <button><img src="search.png" alt="Search"></button>
+            </div>
+            <div class="cart-icon" onclick="showCart()">
+                <img src="cart.png" alt="Cart" style="width: 30px; height: 30px;">
+                <span id="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <div class="info-item">
+                <strong>Location:</strong> Nairobi, Kenya
+            </div>
+            <div class="info-item">
+                <strong>Phone Number:</strong> +254 712 345 678
+            </div>
+            <div class="info-item">
+                <strong>Email:</strong> support@joetush.com
+            </div>
+        </div>
+        <div class="social-links">
+            <h3>Follow Us</h3>
+            <a href="https://facebook.com/joetush" target="_blank">Facebook</a>
+            <a href="https://twitter.com/joetush" target="_blank">Twitter</a>
+            <a href="https://instagram.com/joetush" target="_blank">Instagram</a>
+            <a href="https://linkedin.com/company/joetush" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total">Total: ksh0</div>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="checkout-modal">
+        <div class="checkout-content">
+            <span class="close" onclick="closeCheckout()">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkout-form">
+                <label for="name">Name:</label>
+                <input type="text" id="checkout-name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="checkout-email" required>
+                <label for="address">Address:</label>
+                <textarea id="checkout-address" required></textarea>
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" required>
+                    <option value="mpesa">M-Pesa</option>
+                    <option value="card">Credit Card</option>
+                </select>
+                <div id="mpesa-fields" style="display: block;">
+                    <label for="phone">M-Pesa Phone Number:</label>
+                    <input type="tel" id="checkout-phone" placeholder="e.g., 0712345678" required>
+                </div>
+                <div id="card-fields" style="display: none;">
+                    <label for="card-number">Card Number:</label>
+                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                    <label for="expiry">Expiry Date:</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" required>
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" placeholder="123" required>
+                </div>
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        updateCartCount();
+
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        function showCart() {
+            document.getElementById('cart-modal').style.display = 'block';
+            renderCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function renderCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p>Size: ${item.size}</p>
+                        <p>Price: ksh${item.price}</p>
+                        <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)">
+                        <button onclick="removeItem(${index})">Remove</button>
+                    </div>
+                `;
+                cartItems.appendChild(itemDiv);
+                total += item.price * item.quantity;
+            });
+            document.getElementById('cart-total').textContent = `Total: ksh${total}`;
+        }
+
+        function updateQuantity(index, quantity) {
+            cart[index].quantity = parseInt(quantity);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            closeCart();
+            document.getElementById('checkout-modal').style.display = 'block';
+        });
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        document.getElementById('checkout-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const method = document.getElementById('payment-method').value;
+            if (method === 'mpesa') {
+                const phone = document.getElementById('checkout-phone').value;
+                alert(`M-Pesa payment initiated. Please check your phone ${phone} for the STK push.`);
+            } else {
+                alert('Payment processed with card. (Simulated)');
+            }
+            alert('Order placed successfully!');
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            closeCheckout();
+        });
+
+        document.getElementById('payment-method').addEventListener('change', (e) => {
+            const method = e.target.value;
+            document.getElementById('mpesa-fields').style.display = method === 'mpesa' ? 'block' : 'none';
+            document.getElementById('card-fields').style.display = method === 'card' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html></content>
+<parameter name="filePath">f:\jumia clone\contact.html
