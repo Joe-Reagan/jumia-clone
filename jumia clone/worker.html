@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Dashboard</title>
+<link rel="stylesheet" href="xtyle.css">
+</head>
+<body>
+    <header>
+       
+        <nav>
+             <logo><img src="logo.png" alt="Logo" height="40px" width="50px"><br><p>Joe Tush</p></logo>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Sign In</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="seller.html">Sell with Us</a></li>
+            </ul>
+             <div class="search">
+                <input type="text" placeholder="Search...">
+                <button><img src="search.png" alt="Search"></button>
+            </div>
+        </nav>
+    </header>
+    <aside>
+        <div class ="aside">
+        <nav>
+            <ul>
+                <li><a href="index.html" title="Go to Home Page">Home</a></li>
+                <li><a href="worker.html" title="Manage Products">Manage Products</a></li>
+                <li><a href="orders.html" title="View Orders">Orders</a></li>
+                <li><a href="#" title="Analytics">Analytics</a></li>
+            </ul>
+           <div class="txth">
+             <p>&copy; 2026 Joe Tush. All rights reserved.</p>
+           </div>
+
+           
+        </nav>
+    </aside>
+    </div>
+    <main>
+    <section class="categories">
+        <h2>Worker Dashboard</h2>
+        <div class="worker-actions">
+            <button id="add-product-btn">Add New Product</button>
+            <button onclick="alert('View Orders')">View Pending Orders</button>
+            <button onclick="alert('Analytics')">View Analytics</button>
+        </div>
+        <div id="add-product-form" class="add-product-form" style="display: none;">
+            <h3>Add New Product</h3>
+            <form id="product-form">
+                <label for="product-name">Product Name:</label>
+                <input type="text" id="product-name" name="name" required>
+
+                <label for="product-price">Price:</label>
+                <input type="number" id="product-price" name="price" step="0.01" required>
+
+                <label for="product-size">Size:</label>
+                <input type="text" id="product-size" name="size" required>
+
+                <label for="product-stock">Stock:</label>
+                <input type="number" id="product-stock" name="stock" required>
+
+                <label for="product-image">Image URL:</label>
+                <input type="url" id="product-image" name="image" placeholder="e.g., socks.jpg">
+
+                <button type="submit">Add Product</button>
+                <button type="button" id="cancel-btn">Cancel</button>
+            </form>
+        </div>
+    </section>
+
+    <div class="products">
+        <div class="product-card">
+            <img src="socks.jpg" alt="Socks" height="50px" width="50px">
+            <h3>Socks</h3>
+            <p>size: 10 <br>Price: 100<br>Stock: 50</p>
+            <button onclick="alert('Edit Product')">Edit</button>
+            <button onclick="alert('Delete Product')">Delete</button>
+        </div>
+
+        <div class="product-card">
+            <img src="belt.jpg" alt="Belt" height="50px" width="50px">
+            <h3>Belt</h3>
+            <p>size: 32 <br>Price: 150<br>Stock: 30</p>
+            <button onclick="alert('Edit Product')">Edit</button>
+            <button onclick="alert('Delete Product')">Delete</button>
+        </div>
+
+        <div class="product-card">
+            <img src="hat.jpg" alt="Hat" height="50px" width="50px">
+            <h3>Hat</h3>
+            <p>size: L <br>Price: 200<br>Stock: 20</p>
+            <button onclick="alert('Edit Product')">Edit</button>
+            <button onclick="alert('Delete Product')">Delete</button>
+        </div>
+
+        <div class="product-card">
+            <img src="gloves.jpg" alt="Gloves" height="50px" width="50px">
+            <h3>Gloves</h3>
+            <p>size: M <br>Price: 250<br>Stock: 15</p>
+            <button onclick="alert('Edit Product')">Edit</button>
+            <button onclick="alert('Delete Product')">Delete</button>
+        </div>
+
+        <div class="product-card">
+            <img src="shirt.svg" alt="Shirt" height="50px" width="50px">
+            <h3>Shirt</h3>
+            <p>size: M <br>Price: 300<br>Stock: 25</p>
+            <button onclick="alert('Edit Product')">Edit</button>
+            <button onclick="alert('Delete Product')">Delete</button>
+        </div>
+
+        <div class="product-card">
+            <img src="jeans.jpg" alt="Jeans" height="20px" width="40px">
+            <h3>Jeans</h3>
+            <p>size: 34 <br>Price: 500<br>Stock: 10</p>
+            <button onclick="alert('Edit Product')">Edit</button>
+            <button onclick="alert('Delete Product')">Delete</button>
+        </div>
+
+        <div class="product-card">
+            <img src="shoes.svg" alt="Shoes" height="50px" width="50px">
+            <h3>Shoes</h3>
+            <p>size: 42 <br>Price: 700<br>Stock: 8</p>
+            <button onclick="alert('Edit Product')">Edit</button>
+            <button onclick="alert('Delete Product')">Delete</button>
+        </div>
+
+        <div class="product-card">
+            <img src="jacket.jpg" alt="Jacket" height="50px" width="50px">
+            <h3>Jacket</h3>
+            <p>size: XL <br>Price: 800<br>Stock: 5</p>
+            <button onclick="alert('Edit Product')">Edit</button>
+            <button onclick="alert('Delete Product')">Delete</button>
+        </div>
+
+    </div>
+    </main>
+<script>
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+});
+
+const addProductBtn = document.getElementById('add-product-btn');
+const addProductForm = document.getElementById('add-product-form');
+const productForm = document.getElementById('product-form');
+const cancelBtn = document.getElementById('cancel-btn');
+
+addProductBtn.addEventListener('click', () => {
+    addProductForm.style.display = 'block';
+});
+
+cancelBtn.addEventListener('click', () => {
+    addProductForm.style.display = 'none';
+    productForm.reset();
+});
+
+productForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Simulate adding product
+    alert('Product added successfully!');
+    addProductForm.style.display = 'none';
+    productForm.reset();
+});
+
+document.querySelectorAll('button').forEach(btn => {
+    if (btn.textContent.includes('Edit') || btn.textContent.includes('Delete')) {
+        // Already has onclick
+    } else if (btn.textContent.includes('Buy Now')) {
+        btn.onclick = () => alert('Added to cart!');
+    }
+});
+</script>
+</body>
+</html></content>
+<parameter name="filePath">f:\jumia clone\worker.html

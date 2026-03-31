@@ -20,6 +20,10 @@
                 <input type="email" id="login-email" name="email" placeholder="Enter your email" required>
                 <label for="login-password">Password:</label>
                 <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+                <div class="role-selection">
+                    <label><input type="radio" name="role" value="user" checked> User</label>
+                    <label><input type="radio" name="role" value="worker"> Worker</label>
+                </div>
                 <button type="submit">Login</button>
             </form>
             <p>Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
@@ -35,6 +39,10 @@
                 <input type="password" id="signup-password" name="password" placeholder="Create a password" required minlength="6">
                 <label for="confirm-password">Confirm Password:</label>
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                <div class="role-selection">
+                    <label><input type="radio" name="role" value="user" checked> User</label>
+                    <label><input type="radio" name="role" value="worker"> Worker</label>
+                </div>
                 <button type="submit">Sign Up</button>
             </form>
             <p>Already have an account? <a href="#" id="show-login">Login</a></p>
@@ -68,6 +76,28 @@
             if (password !== confirmPassword) {
                 e.preventDefault();
                 alert('Passwords do not match!');
+            }
+        });
+
+        // Set action based on role
+        const loginForm = document.querySelector('.login-container form');
+        const signupForm2 = document.querySelector('.signup-container form');
+
+        loginForm.addEventListener('submit', (e) => {
+            const role = loginForm.querySelector('input[name="role"]:checked').value;
+            if (role === 'worker') {
+                loginForm.action = 'worker.html';
+            } else {
+                loginForm.action = 'dashboard.html';
+            }
+        });
+
+        signupForm2.addEventListener('submit', (e) => {
+            const role = signupForm2.querySelector('input[name="role"]:checked').value;
+            if (role === 'worker') {
+                signupForm2.action = 'worker.html';
+            } else {
+                signupForm2.action = 'dashboard.html';
             }
         });
     </script>
