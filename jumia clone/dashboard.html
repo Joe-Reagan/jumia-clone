@@ -11,14 +11,27 @@
        
         <nav>
              <logo><img src="logo.png" alt="Logo" height="40px" width="50px"><br><p>Joe Tush</p></logo>
-            <ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="login.html">Sign In</a></li>
                 <li><a href="login.html">Login</a></li>
+                <li><a href="worker.html">Worker </a></li>
+                <li><a href="seller.html">Sell with Us</a></li>
+            
+                
             </ul>
              <div class="search">
                 <input type="text" placeholder="Search...">
                 <button><img src="search.png" alt="Search"></button>
+            </div>
+            <div class="cart-icon" onclick="showCart()">
+                <img src="cart.png" alt="Cart" style="width: 30px; height: 30px;">
+                <span id="cart-count">0</span>
             </div>
         </nav>
     </header>
@@ -28,7 +41,7 @@
             <ul>
                 <li><a href="index.html" title="Go to Home Page">Home</a></li>
                 <li><a href="dashboard.html" title="Browse All Products">Products</a></li>
-                <li><a href="#" title="View Your Orders">Your Orders</a></li>
+                <li><a href="orders.html" title="View Your Orders">Your Orders</a></li>
             </ul>
            <div class="txth">
              <p>&copy; 2026 Joe Tush. All rights reserved.</p>
@@ -39,9 +52,10 @@
     </aside>
     </div>
     <main>
-    <section class="categories">
+    <section class="categories" id="all" >
         <h2>Shop by Category</h2>
         <ul class="category-list">
+            <li><a href="#all">All Products</a></li>
             <li><a href="#mens">Men's Clothing</a></li>
             <li><a href="#womens">Women's Clothing</a></li>
             <li><a href="#kids">Kids' Clothing</a></li>
@@ -55,156 +69,327 @@
         </ul>
     </section>
 
-    <div class="products">
-        <div class="product-card">
-            <img src="socks.jpg" alt="Socks" height="50px" width="50px">
-            <h3>Socks</h3>
-            <p>size: 10 <br>Price:  ksh100</p>
-            <button>Buy Now!</button>
+    <section id="mens" class="category-section">
+        <h2>Men's Clothing</h2>
+        <div class="products">
+            <div class="product-card">
+                <img src="shirt.svg" alt="Shirt" height="50px" width="50px">
+                <h3>Shirt</h3>
+                <p>size: M <br>Price: ksh300</p>
+                <button>Buy Now!</button>
+            </div>
+            <div class="product-card">
+                <img src="jeans.jpg" alt="Jeans" height="50px" width="50px">
+                <h3>Jeans</h3>
+                <p>size: 34 <br>Price: ksh500</p>
+                <button>Buy Now!</button>
+            </div>
+            <div class="product-card">
+                <img src="tshirt.jpg" alt="T-Shirt" height="50px" width="50px">
+                <h3>T-Shirt</h3>
+                <p>size: L <br>Price: ksh250</p>
+                <button>Buy Now!</button>
+            </div>
+            <div class="product-card">
+                <img src="shorts.jpg" alt="Shorts" height="50px" width="50px">
+                <h3>Shorts</h3>
+                <p>size: 32 <br>Price: ksh400</p>
+                <button>Buy Now!</button>
+            </div>
         </div>
+    </section>
 
-        <div class="product-card">
-            <img src="belts.jpg" alt="Belt" height="50px" width="50px">
-            <h3>Belt</h3>
-            <p>size: 32 <br>Price: ksh150</p>
-            <button>Buy Now!</button>
+    <section id="womens" class="category-section">
+        <h2>Women's Clothing</h2>
+        <div class="products">
+            <div class="product-card">
+                <img src="dress.jpg" alt="Dress" height="50px" width="50px">
+                <h3>Dress</h3>
+                <p>size: M <br>Price: ksh800</p>
+                <button>Buy Now!</button>
+            </div>
         </div>
+    </section>
 
-        <div class="product-card">
-            <img src="caps.jpg" alt="Hat" height="50px" width="50px">
-            <h3>Hat</h3>
-            <p>size: L <br>Price:   ksh2000</p>
-            <button>Buy Now!</button>
+    <section id="kids" class="category-section">
+        <h2>Kids' Clothing</h2>
+        <div class="products">
+            <!-- Add kids products here if available -->
         </div>
+    </section>
 
-        <div class="product-card">
-            <img src="gloves.png" alt="Gloves" height="50px" width="50px">
-            <h3>Gloves</h3>
-            <p>size: M <br>Price: ksh250</p>
-            <button>Buy Now!</button>                                   
+    <section id="accessories" class="category-section">
+        <h2>Accessories</h2>
+        <div class="products">
+            <div class="product-card">
+                <img src="belts.jpg" alt="Belt" height="50px" width="50px">
+                <h3>Belt</h3>
+                <p>size: 32 <br>Price: ksh150</p>
+                <button>Buy Now!</button>
+            </div>
+            <div class="product-card">
+                <img src="caps.jpg" alt="Hat" height="50px" width="50px">
+                <h3>Hat</h3>
+                <p>size: L <br>Price: ksh200</p>
+                <button>Buy Now!</button>
+            </div>
+            <div class="product-card">
+                <img src="gloves.png" alt="Gloves" height="50px" width="50px">
+                <h3>Gloves</h3>
+                <p>size: M <br>Price: ksh250</p>
+                <button>Buy Now!</button>
+            </div>
+            <div class="product-card">
+                <img src="scarf.jpg" alt="Scarf" height="50px" width="50px">
+                <h3>Scarf</h3>
+                <p>size: One Size <br>Price: ksh220</p>
+                <button>Buy Now!</button>
+            </div>
         </div>
+    </section>
 
-        <div class="product-card">
-            <img src="shirt.svg" alt="Shirt" height="50px" width="50px">
-            <h3>Shirt</h3>
-            <p>size: M <br>Price: ksh300</p>
-            <button>Buy Now!</button>
+    <section id="shoes" class="category-section">
+        <h2>Shoes</h2>
+        <div class="products">
+            <div class="product-card">
+                <img src="shoes.svg" alt="Shoes" height="50px" width="50px">
+                <h3>Shoes</h3>
+                <p>size: 42 <br>Price: ksh3700</p>
+                <button>Buy Now!</button>
+            </div>
+            <div class="product-card">
+                <img src="boots.jpg" alt="Boots" height="50px" width="50px">
+                <h3>Boots</h3>
+                <p>size: 43 <br>Price: ksh3500</p>
+                <button>Buy Now!</button>
+            </div>
         </div>
+    </section>
 
-        <div class="product-card">
-            <img src="jeano.jpg" alt="Jeans" height="20px" width="40px">
-            <h3>Jeans</h3>
-            <p>size: 34 <br>Price: ksh500</p>
-            <button>Buy Now!</button>
+    <section id="sportswear" class="category-section">
+        <h2>Sportswear</h2>
+        <div class="products">
+            <div class="product-card">
+                <img src="sport wear.jpg" alt="Sportswear" height="50px" width="50px">
+                <h3>Sportswear</h3>
+                <p>size: M <br>Price: ksh700</p>
+                <button>Buy Now!</button>
+            </div>
         </div>
+    </section>
 
-        <div class="product-card">
-            <img src="shoes.svg" alt="Shoes" height="50px" width="50px">
-            <h3>Shoes</h3>
-            <p>size: 42 <br>Price: ksh3700</p>
-            <button>Buy Now!</button>
+    <section id="outerwear" class="category-section">
+        <h2>Outerwear</h2>
+        <div class="products">
+            <div class="product-card">
+                <img src="jacket.jpg" alt="Jacket" height="50px" width="50px">
+                <h3>Jacket</h3>
+                <p>size: XL <br>Price: ksh1800</p>
+                <button>Buy Now!</button>
+            </div>
         </div>
+    </section>
 
-        <div class="product-card">
-            <img src="jacket.jpg" alt="Jacket" height="50px" width="50px">
-            <h3>Jacket</h3>
-            <p>size: XL <br>Price: ksh1800</p>
-            <button>Buy Now!</button>
+    <section id="underwear" class="category-section">
+        <h2>Underwear</h2>
+        <div class="products">
+            <div class="product-card">
+                <img src="socks.jpg" alt="Socks" height="50px" width="50px">
+                <h3>Socks</h3>
+                <p>size: 10 <br>Price: ksh100</p>
+                <button>Buy Now!</button>
+            </div>
         </div>
+    </section>
 
-        <div class="product-card">
-            <img src="socks.jpg" alt="Socks" height="50px" width="50px">
-            <h3>Socks</h3>
-            <p>size: 10 <br>Price: ksh100</p>
-            <button>Buy Now!</button>
+    <section id="sleepwear" class="category-section">
+        <h2>Sleepwear</h2>
+        <div class="products">
+            <div class="product-card">
+                <img src="robe.jpg" alt="Robe" height="50px" width="50px">
+                <h3>Robe</h3>
+                <p>size: L <br>Price: ksh600</p>
+                <button>Buy Now!</button>
+            </div>
         </div>
+    </section>
 
-        <div class="product-card">
-            <img src="belts.jpg" alt="Belt" height="50px" width="50px">
-            <h3>Belt</h3>
-            <p>size: 32 <br>Price: ksh150</p>
-            <button>Buy Now!</button>
+    <section id="formal" class="category-section">
+        <h2>Formal Wear</h2>
+        <div class="products">
+            <div class="product-card">
+                <img src="suits.jpg" alt="Suit" height="50px" width="50px">
+                <h3>Suit</h3>
+                <p>size: 42 <br>Price: ksh5000</p>
+                <button>Buy Now!</button>
+            </div>
         </div>
-
-        <div class="product-card">
-            <img src="caps.jpg" alt="Hat" height="50px" width="50px">
-            <h3>Hat</h3>
-            <p>size: L <br>Price: ksh2000</p>
-            <button>Buy Now!</button>
-        </div>
-
-        <div class="product-card">
-            <img src="gloves.png" alt="Gloves" height="50px" width="50px">
-            <h3>Gloves</h3>
-            <p>size: M <br>Price: ksh250</p>
-            <button>Buy Now!</button>                                   
-        </div>
-
-        <div class="product-card">
-            <img src="shirt.svg" alt="Shirt" height="50px" width="50px">
-            <h3>Shirt</h3>
-            <p>size: M <br>Price: ksh300</p>
-            <button>Buy Now!</button>
-        </div>
-
-        <div class="product-card">
-            <img src="mummy.jpg" alt="Jeans" height="20px" width="40px">
-            <h3>Jeans</h3>
-            <p>size: 34 <br>Price: ksh500</p>
-            <button>Buy Now!</button>
-        </div>
-
-        <div class="product-card">
-            <img src="shoes.svg" alt="Shoes" height="50px" width="50px">
-            <h3>Shoes</h3>
-            <p>size: 42 <br>Price: ksh3700</p>
-            <button>Buy Now!</button>
-        </div>
-
-        <div class="product-card">
-            <img src="jacket.jpg" alt="Jacket" height="50px" width="50px">
-            <h3>Jacket</h3>
-            <p>size: XL <br>Price: ksh1800</p>
-            <button>Buy Now!</button>
-        </div>
-
-        <div class="product-card">
-            <img src="caps.jpg" alt="Cap" height="50px" width="50px">
-            <h3>Cap</h3>
-            <p>size: L <br>Price: ksh1800</p>
-            <button>Buy Now!</button>
-        </div>
-
-        <div class="product-card">
-            <img src="scarf.jpg" alt="Scarf" height="50px" width="50px">
-            <h3>Scarf</h3>
-            <p>size: One Size <br>Price: ksh220</p>
-            <button>Buy Now!</button>
-        </div>
-
-        <div class="product-card">
-            <img src="boots.jpg" alt="Boots" height="50px" width="50px">
-            <h3>Boots</h3>
-            <p>size: 43 <br>Price: ksh3500</p>
-            <button>Buy Now!</button>
-        </div>
-
-        <div class="product-card">
-            <img src="tshirt.jpg" alt="T-Shirt" height="50px" width="50px">
-            <h3>T-Shirt</h3>
-            <p>size: L <br>Price: ksh250</p>
-            <button>Buy Now!</button>
-        </div>
-
-
-    </div>
+    </section>
     </main>
+
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total">Total: ksh0</div>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="checkout-modal">
+        <div class="checkout-content">
+            <span class="close" onclick="closeCheckout()">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkout-form">
+                <label for="name">Name:</label>
+                <input type="text" id="checkout-name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="checkout-email" required>
+                <label for="address">Address:</label>
+                <textarea id="checkout-address" required></textarea>
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" required>
+                    <option value="mpesa">M-Pesa</option>
+                    <option value="card">Credit Card</option>
+                </select>
+                <div id="mpesa-fields" style="display: block;">
+                    <label for="phone">M-Pesa Phone Number:</label>
+                    <input type="tel" id="checkout-phone" placeholder="e.g., 0712345678" required>
+                </div>
+                <div id="card-fields" style="display: none;">
+                    <label for="card-number">Card Number:</label>
+                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                    <label for="expiry">Expiry Date:</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" required>
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" placeholder="123" required>
+                </div>
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
+    </div>
+
 <script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+updateCartCount();
+
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+});
+
+function showCart() {
+    document.getElementById('cart-modal').style.display = 'block';
+    renderCart();
+}
+
+function closeCart() {
+    document.getElementById('cart-modal').style.display = 'none';
+}
+
+function renderCart() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div>
+                <h4>${item.name}</h4>
+                <p>Size: ${item.size}</p>
+                <p>Price: ksh${item.price}</p>
+                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)">
+                <button onclick="removeItem(${index})">Remove</button>
+            </div>
+        `;
+        cartItems.appendChild(itemDiv);
+        total += item.price * item.quantity;
+    });
+    document.getElementById('cart-total').textContent = `Total: ksh${total}`;
+}
+
+function updateQuantity(index, quantity) {
+    cart[index].quantity = parseInt(quantity);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+}
+
+function updateCartCount() {
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cart-count').textContent = count;
+}
+
+document.getElementById('checkout-btn').addEventListener('click', () => {
+    closeCart();
+    document.getElementById('checkout-modal').style.display = 'block';
+});
+
+function closeCheckout() {
+    document.getElementById('checkout-modal').style.display = 'none';
+}
+
+document.getElementById('checkout-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const method = document.getElementById('payment-method').value;
+    if (method === 'mpesa') {
+        const phone = document.getElementById('checkout-phone').value;
+        alert(`M-Pesa payment initiated. Please check your phone ${phone} for the STK push.`);
+    } else {
+        alert('Payment processed with card. (Simulated)');
+    }
+    alert('Order placed successfully!');
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    closeCheckout();
+});
+
+document.getElementById('payment-method').addEventListener('change', (e) => {
+    const method = e.target.value;
+    document.getElementById('mpesa-fields').style.display = method === 'mpesa' ? 'block' : 'none';
+    document.getElementById('card-fields').style.display = method === 'card' ? 'block' : 'none';
+});
+
 document.querySelectorAll('button').forEach(btn => {
     if (btn.textContent.includes('Buy Now')) {
-        btn.onclick = () => alert('Added to cart!');
+        btn.onclick = (e) => {
+            const card = e.target.closest('.product-card');
+            const name = card.querySelector('h3').textContent;
+            const priceText = card.querySelector('p').textContent;
+            const price = parseInt(priceText.split('Price: ')[1].replace('ksh', ''));
+            const size = priceText.split('size: ')[1].split(' <br>')[0];
+            const image = card.querySelector('img').src;
+            const quantity = parseInt(prompt('Enter quantity:', '1')) || 1;
+            addToCart({ name, price, size, image, quantity });
+        };
     }
 });
+
+function addToCart(item) {
+    const existing = cart.find(i => i.name === item.name && i.size === item.size);
+    if (existing) {
+        existing.quantity += item.quantity;
+    } else {
+        cart.push(item);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    alert('Added to cart!');
+}
 </script>
 </body>
 </html>
